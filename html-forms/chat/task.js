@@ -46,6 +46,7 @@ function sendMessage(e) {
     <div class="message__text">${botMessages[rndmMsg(botMessages.length)]}</div>
   </div>
   `;
+  chatInput.value = '';
   }
 }
 
