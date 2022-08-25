@@ -5,21 +5,26 @@ let interestList = Array.from(mainCheckbox);
 interestList.forEach((item) => {
   item.addEventListener("change", () => {
     if (item.checked && item.closest("ul") === mainUl) {
-      let arr = Array.from(item.parentElement.nextElementSibling.children);
-      arr.forEach((arrItem) => {
-        let it = Array.from(arrItem.children);
-        it.forEach((input) => {
+      let interestsArr = Array.from(
+        item.parentElement.nextElementSibling.children
+      );
+
+      interestsArr.forEach((arrItem) => {
+        let label = Array.from(arrItem.children);
+        label.forEach((input) => {
           let inputBox = Array.from(input.children);
           inputBox[0].setAttribute("checked", true);
         });
       });
     } else if (!item.checked && item.closest("ul") === mainUl) {
-      let arr = Array.from(item.parentElement.nextElementSibling.children);
-      arr.forEach((arrItem) => {
-        let it = Array.from(arrItem.children);
-        it.forEach((input) => {
+      let interestsArr = Array.from(
+        item.parentElement.nextElementSibling.children
+      );
+      interestsArr.forEach((arrItem) => {
+        let label = Array.from(arrItem.children);
+        label.forEach((input) => {
           let inputBox = Array.from(input.children);
-          inputBox[0].removeAttribute('checked');
+          inputBox[0].removeAttribute("checked");
         });
       });
     }
