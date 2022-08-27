@@ -1,31 +1,21 @@
-let mainCheckbox = document.querySelectorAll(".interest__check");
+let interestList = document.querySelectorAll(".interest__check");
 let mainUl = document.querySelector("ul");
-let interestList = Array.from(mainCheckbox);
+let interestListArr = Array.from(interestList);
 
-interestList.forEach((item) => {
+interestListArr.forEach((item) => {
   item.addEventListener("change", () => {
     if (item.checked && item.closest("ul") === mainUl) {
-      let interestsArr = Array.from(
-        item.parentElement.nextElementSibling.children
-      );
-
-      interestsArr.forEach((arrItem) => {
-        let label = Array.from(arrItem.children);
-        label.forEach((input) => {
-          let inputBox = Array.from(input.children);
-          inputBox[0].setAttribute("checked", true);
-        });
+      let interest = Array.from(item.parentElement.nextElementSibling.children);
+      interest.forEach((element) => {
+        element.firstElementChild.firstElementChild.setAttribute(
+          "checked",
+          true
+        );
       });
     } else if (!item.checked && item.closest("ul") === mainUl) {
-      let interestsArr = Array.from(
-        item.parentElement.nextElementSibling.children
-      );
-      interestsArr.forEach((arrItem) => {
-        let label = Array.from(arrItem.children);
-        label.forEach((input) => {
-          let inputBox = Array.from(input.children);
-          inputBox[0].removeAttribute("checked");
-        });
+      let interest = Array.from(item.parentElement.nextElementSibling.children);
+      interest.forEach((element) => {
+        element.firstElementChild.firstElementChild.outerHTML = '<input type="checkbox" class="interest__check"></input>'
       });
     }
   });
