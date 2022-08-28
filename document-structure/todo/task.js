@@ -1,41 +1,29 @@
 let searchField = document.getElementById("task__input");
 let taskList = document.getElementById("tasks__list");
 let btn = document.getElementById("tasks__add");
+let removeBtn = document.querySelectorAll("task__remove");
 
-searchField.addEventListener("focus", () => {
-  searchFieldInputFocusFlag = true;
-});
-searchField.addEventListener("blur", () => {
-  searchFieldInputFocusFlag = false;
-});
-
-function addTask(e) {
-  if (
-    (searchFieldInputFocusFlag && searchField.value && e.key === "Enter") ||
-    (searchField.value && e.type === "click")
-  ) {
-    taskList.insertAdjacentHTML(
-      "afterBegin",
-      `<div class="task">
+function addTask() {
+  let task = searchField.value.trim();
+  if (task.length > 0) {
+    let element = document.createElement("div");
+    element.classList.add("task");
+    taskList.appendChild(element);
+    element.innerHTML += `
     <div class="task__title">
-      ${searchField.value}
+      ${task}
     </div>
     <a href="#" class="task__remove">&times;</a>
-  </div>`
-    );
+  </div>`;
+
+    let removeItem = element.querySelector(".task__remove");
+    removeItem.addEventListener("click", (e) => {
+      e.target.closest(".task").remove();
+    });
     searchField.value = "";
-    let removeBtn = document.querySelector("a.task__remove");
-    removeBtn.addEventListener("click", removeTask);
   }
+  return false;
 }
 
-function removeTask(e) {
-  e.target.parentElement.remove();
-}
-
-function stop(e) {
-  e.preventDefault();
-}
-
-btn.addEventListener("click", addTask);
-document.addEventListener("keydown", addTask);
+btn.onclick = addTask;
+searchField.change = addTask;
