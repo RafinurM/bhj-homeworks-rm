@@ -1,14 +1,16 @@
 let helpText = document.getElementsByClassName("has-tooltip");
 
 let helpTextArr = Array.from(helpText);
-let tip = document.createElement("div"); // создаем div
-tip.setAttribute("class", "tooltip"); // добавляем класс
-tip.classList.add("tooltip_active"); // добавляем активный класс
+let tip = document.createElement("div");
+tip.setAttribute("class", "tooltip"); 
+tip.classList.add("tooltip_active"); 
 helpTextArr.forEach((item) => {
   item.addEventListener("click", (e) => {
     e.preventDefault();
-    let tipTitle = item.getAttribute("title"); //получаем текст подсказки
-    tip.innerText = tipTitle; // вставляем текст подсказки
+    let tipTitle = item.getAttribute("title"); 
+    tip.innerText = tipTitle; 
     item.insertAdjacentElement("afterEnd", tip);
+    let tipPosition = item.getBoundingClientRect();
+    tip.style.left = `${tipPosition.left}px`
   });
 });
